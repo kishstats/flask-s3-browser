@@ -1,5 +1,11 @@
 {% extends "bootstrap/base.html" %}
 {% block html_attribs %} lang="en"{% endblock %}
+{% block head %}
+  {{super()}}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/styles.css">
+{% endblock %}
 {% block title %}S3 Object List{% endblock %}
 
 {% block navbar %}
@@ -36,12 +42,27 @@
           <th>Filename</th>
           <th>Last Modified</th>
           <th>Type</th>
+          <th></th>
         </tr>
         {% for f in files %}
         <tr>
           <td>{{ f.key }}</td>
           <td>{{ f.last_modified | datetimeformat }}</td>
           <td>{{ f.key | file_type }}</td>
+          <td class="td-buttons">
+            <form class="delete-form" action="{{ url_for('delete') }}" method="POST">
+              <input type="hidden" name="key" value="{{ f.key }}">
+              <button type="submit" class="btn btn-danger btn-sm">
+                <i class="fa fa-trash-alt"></i>
+              </button>
+            </form>
+            <form class="download-form" action="{{ url_for('download') }}" method="POST">
+              <input type="hidden" name="key" value="{{ f.key }}">
+              <button type="submit" class="btn btn-default btn-sm">
+                <i class="fa fa-download"></i>
+              </button>
+            </form>
+          </td>
         </tr>
         {% endfor %}
       </table>

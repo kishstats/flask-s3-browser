@@ -1,18 +1,5 @@
-{% extends "bootstrap/base.html" %}
-{% block html_attribs %} lang="en"{% endblock %}
-{% block head %}
-  {{super()}}
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
-  <link rel="stylesheet" href="/static/styles.css">
-{% endblock %}
+{% extends "layout.html" %}
 {% block title %}S3 Object List{% endblock %}
-
-{% block navbar %}
-<div class="navbar navbar-fixed-top">
-  <!-- ... -->
-</div>
-{% endblock %}
 
 {% block content %}
   <div class="container">

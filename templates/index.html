@@ -1,12 +1,24 @@
-{% extends "bootstrap/base.html" %}
-{% block title %}This is an example page{% endblock %}
-
-{% block navbar %}
-<div class="navbar navbar-fixed-top">
-  <!-- ... -->
-</div>
-{% endblock %}
+{% extends "layout.html" %}
+{% block title %}S3 Bucket List{% endblock %}
 
 {% block content %}
-  <h1>Hello, Bootstrap</h1>
+  <div class="container">
+    <div class="col-12-xs">
+      <h3>Bucket List</h3>
+
+      <table class="table table-striped">
+        <tr>
+          <th>Bucket Name</th>
+          <th>Created</th>
+        </tr>
+
+        {% for bucket in buckets %}
+        <tr>
+          <td>{{ bucket['Name'] }}</td>
+          <td>{{ bucket['CreationDate'] | datetimeformat }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
 {% endblock %}

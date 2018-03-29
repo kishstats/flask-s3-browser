@@ -20,6 +20,4 @@ def get_bucket():
 
 def get_buckets_list():
     client = boto3.client('s3')
-    buckets = client.list_buckets()
-
     return client.list_buckets().get('Buckets')

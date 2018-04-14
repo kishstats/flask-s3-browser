@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, \
-    Response
+    Response, session
 from flask_bootstrap import Bootstrap
 from filters import datetimeformat, file_type
 from resources import get_bucket, get_buckets_list
@@ -11,10 +11,15 @@ app.jinja_env.filters['datetimeformat'] = datetimeformat
 app.jinja_env.filters['file_type'] = file_type
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    buckets = get_buckets_list()
-    return render_template("index.html", buckets=buckets)
+    if request.method == 'POST':
+        bucket = request.form['bucket']
+        session['bucket'] = bucket
+        return redirect(url_for('files'))
+    else:
+        buckets = get_buckets_list()
+        return render_template("index.html", buckets=buckets)
 
 
 @app.route('/files')
